@@ -7,7 +7,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/dashboard'
+            redirect: '/login'
         },
         {
             path: '/',
@@ -16,13 +16,29 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard',
-                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../views/home/Dashboard.vue'),
                     meta: { title: '系统首页' }
                 },
                 {
                     path: '/icon',
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
                     meta: { title: '自定义图标' }
+                },
+                {
+                    path: '/oms',
+                    component: () => import( '../views/oms/Index'),
+                    meta: { title: '商场首页' }
+                },
+
+                {
+                    path: '/car',
+                    component: () => import( '../views/oms/Car'),
+                    meta: { title: '汽车' }
+                },
+                {
+                    path: '/phone',
+                    component: () => import( '../views/oms/Phone'),
+                    meta: { title: '手机' }
                 },
                 {
                     path: '/table',
@@ -106,7 +122,7 @@ export default new Router({
         },
         {
             path: '/login',
-            component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
+            component: () => import(/* webpackChunkName: "login" */ '../views/login/Index'),
             meta: { title: '登录' }
         },
         {

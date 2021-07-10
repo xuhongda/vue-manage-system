@@ -81,7 +81,11 @@ export default {
   },
 
   created() {
+
     this.query.userId = sessionStorage.getItem("userId");
+    if (this.query.userId == null){
+     // this.$router.push("/login")
+    }
     this.getData();
 
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏

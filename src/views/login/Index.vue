@@ -57,6 +57,7 @@ export default {
           this.$message.success('登录成功');
           localStorage.setItem('ms_username', this.param.username);
           sessionStorage.setItem("userId",this.userInfo.id);
+          sessionStorage.setItem("token",'000');
          // this.$store.state.userId = this.userInfo.id;
           this.$store.commit('setUserId',this.userInfo.id)
           this.$router.push({

@@ -67,11 +67,33 @@ export default {
   methods: {
 
     getData() {
-      fetchData(this.query).then(res => {
-        console.log("res", res);
-        this.items = res.items;
-      });
-
+      if (this.$store.state.sideBar){
+        console.log('1-sideBar',this.$store.state.sideBar);
+        this.items=this.$store.state.sideBar;
+      }else {
+        fetchData(this.query).then(res => {
+          console.log("2-res", res);
+          this.items = res.items;
+          this.$store.commit("setSideBar",this.items)
+        });
+      }
+    },
+    keepSideBarItems(){
+      // 在页面加载时读取sessionStorage里的状态信息
+      if (sessionStorage.getItem('store')) {
+        this.$store.replaceState(
+            Object.assign(
+                {},
+                this.$store.state,
+                JSON.parse(sessionStorage.getItem('store'))
+            )
+        )
+      }
+      // 在页面刷新时将vuex里的信息保存到sessionStorage里
+      // beforeunload事件在页面刷新时先触发
+      window.addEventListener('beforeunload', () => {
+        sessionStorage.setItem('store', JSON.stringify(this.$store.state))
+      })
     }
   },
   computed: {
@@ -81,11 +103,8 @@ export default {
   },
 
   created() {
-
-    this.query.userId = sessionStorage.getItem("userId");
-    if (this.query.userId == null){
-     // this.$router.push("/login")
-    }
+    //console.log("sideBar create")
+    this.keepSideBarItems();
     this.getData();
 
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
@@ -93,6 +112,9 @@ export default {
       this.collapse = msg;
       bus.$emit('collapse-content', msg);
     });
+
+
+
   },
 
   watch:{

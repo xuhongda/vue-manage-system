@@ -6,11 +6,15 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state:{
-        userId:'123'
+        userId:null,
+        sideBar:null
     },
     mutations:{
         setUserId(state,id){
             state.userId = id;
+        },
+        setSideBar(state,sideBar){
+            state.sideBar =sideBar;
         }
     },
     actions:{},

@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: "Phone"
+  name: "Phone",created() {
+    console.log("phone create")
+
+  }
 }
 </script>
 

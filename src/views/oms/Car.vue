@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: "Car"
+  name: "Car",
+  created() {
+    console.log("car create")
+  }
 }
 </script>
 

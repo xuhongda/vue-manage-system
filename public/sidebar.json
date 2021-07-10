@@ -1,35 +1,44 @@
 {
-  "items":[
-  {
-    "icon": "el-icon-lx-home",
-    "index": "dashboard",
-    "title": "系统首页"
-  },
-
-  {
-    "icon": "el-icon-goods",
-    "index": "#",
-    "title": "购物中心",
-    "subs": [
-      {
-        "index": "oms",
-        "title": "商场首页"
-      },
-      {
-        "index": "#1",
-        "title": "商品列表",
-        "subs": [
-          {
-            "index": "car",
-            "title": "汽车"
-          },
-          {
-            "index": "phone",
-            "title": "手机"
-          }
-        ]
-      }
-    ]
-  }
-]
+  "items": [
+    {
+      "icon": "el-icon-lx-home",
+      "index": "dashboard",
+      "title": "系统首页"
+    },
+    {
+      "icon": "el-icon-goods",
+      "index": "#",
+      "title": "购物中心",
+      "subs": [
+        {
+          "index": "oms",
+          "title": "商场首页"
+        },
+        {
+          "index": "#1",
+          "title": "商品列表",
+          "subs": [
+            {
+              "index": "car",
+              "title": "汽车"
+            },
+            {
+              "index": "phone",
+              "title": "手机"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "icon": "el-icon-s-cooperation",
+      "index": "form",
+      "title": "基本表单"
+    },
+    {
+      "icon": "el-icon-s-grid",
+      "index": "table",
+      "title": "基础表格"
+    }
+  ]
 }

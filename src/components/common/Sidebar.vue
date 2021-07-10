@@ -67,13 +67,6 @@ export default {
   methods: {
 
     getData() {
-      bus.$on("userInfo", (msg) => {
-        // A发送来的消息
-        let item = JSON.parse(msg);
-        this.query.userId = item.id;
-        bus.$off("userInfo");
-      });
-
       fetchData(this.query).then(res => {
         console.log("res", res);
         this.items = res.items;
@@ -88,11 +81,7 @@ export default {
   },
 
   created() {
-
-
-
-
-
+    this.query.userId = sessionStorage.getItem("userId");
     this.getData();
 
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏

@@ -30,6 +30,8 @@
 
 <script>
 import bus from '../../components/common/bus';
+import Vue from "vue";
+import store from "@/store";
 export default {
   data: function() {
     return {
@@ -54,7 +56,9 @@ export default {
         if (valid) {
           this.$message.success('登录成功');
           localStorage.setItem('ms_username', this.param.username);
-          bus.$emit("userInfo", JSON.stringify(this.userInfo));
+          sessionStorage.setItem("userId",this.userInfo.id);
+         // this.$store.state.userId = this.userInfo.id;
+          this.$store.commit('setUserId',this.userInfo.id)
           this.$router.push({
             path: '/dashboard',
             query: {

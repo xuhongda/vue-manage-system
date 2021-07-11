@@ -29,9 +29,11 @@
 </template>
 
 <script>
-import bus from '../../components/common/bus';
-import Vue from "vue";
-import store from "@/store";
+
+import {fetchData} from "@/api/routes";
+
+
+
 export default {
   data: function() {
     return {
@@ -55,6 +57,25 @@ export default {
       this.$refs.login.validate(valid => {
         if (valid) {
           this.$message.success('登录成功');
+
+          /*模拟动态路由*/
+          let newRoutes = [{
+            path: '/404',
+            component: '@/components/page/404.vue',
+            meta: { title: '404' }
+          }];
+          fetchData({}).then(res=>{
+            for (let re of res.routes) {
+             /* let component = re.component;*/
+              newRoutes.push(re);
+            }
+            console.log('newRoutes',newRoutes);
+            this.$store.commit('setRoutes',JSON.stringify(newRoutes))
+           // this.$router.addRoutes(routes);
+
+          });
+
+
           localStorage.setItem('ms_username', this.param.username);
           sessionStorage.setItem("userId",this.userInfo.id);
           sessionStorage.setItem("token",'000');

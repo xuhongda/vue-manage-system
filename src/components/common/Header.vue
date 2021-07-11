@@ -69,6 +69,8 @@ export default {
         // 用户名下拉菜单选择事件
         handleCommand(command) {
             if (command === 'loginout') {
+                this.$store.commit("setSideBar",null);
+                this.$store.commit("setRoutes",null);
                 sessionStorage.clear()
                 localStorage.removeItem('ms_username');
                 this.$router.push('/login');

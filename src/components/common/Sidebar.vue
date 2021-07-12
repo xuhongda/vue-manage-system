@@ -55,8 +55,6 @@
 import bus from '../common/bus';
 import {fetchData} from '@/api/sidebar';
 import {fetchRoutes} from '@/api/routes';
-import store from "@/store";
-import {children,routes} from "@/router";
 
 export default {
   data() {

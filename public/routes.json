@@ -22,6 +22,11 @@
       "meta": { "title": "手机" }
     },
     {
+      "path": "/table",
+      "component": "page/BaseTable",
+      "meta": { "title": "基础表格" }
+    },
+    {
       "path": "/404",
       "component": "404.vue",
       "meta": { "title": "404" }

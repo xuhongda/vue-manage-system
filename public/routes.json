@@ -17,6 +17,11 @@
       "meta": { "title": "汽车" }
     },
     {
+      "path": "/phone",
+      "component": "oms/Phone",
+      "meta": { "title": "手机" }
+    },
+    {
       "path": "/404",
       "component": "404.vue",
       "meta": { "title": "404" }

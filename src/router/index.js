@@ -197,7 +197,8 @@ router.beforeEach((to, from, next) => {
 
 
 router.afterEach(()=>{
-   creatRoutes();
+    console.log('afterEach')
+    creatRoutes();
 })
 
 export default router;

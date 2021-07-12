@@ -124,8 +124,8 @@ export default {
     //console.log("sideBar create")
 
     this.getRoutes();
-    this.keepVuexItems();
     this.getSideBar();
+    this.keepVuexItems();
 
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
     bus.$on('collapse', msg => {

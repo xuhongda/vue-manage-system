@@ -31,6 +31,8 @@
 <script>
 
 
+import {fetchRoutes} from "@/api/routes";
+
 export default {
   data: function() {
     return {
@@ -57,6 +59,7 @@ export default {
           localStorage.setItem('ms_username', this.param.username);
           sessionStorage.setItem("userId",this.userInfo.id);
           sessionStorage.setItem("token",'000');
+          this.getRoutes();
           this.$store.commit('setUserId',this.userInfo.id)
           this.$router.push({
             path: '/dashboard',
@@ -71,6 +74,22 @@ export default {
         }
       });
     },
+    getRoutes(){
+      let newRoutes = [{
+        path: '/404',
+        component: '404.vue',
+        meta: { title: '404' }
+      }];
+      fetchRoutes({}).then(res=>{
+        for (let re of res.routes) {
+          newRoutes.push(re);
+        }
+        this.$store.commit('setRoutes',newRoutes)
+        this.$store.commit('setIsAddRoutes',true)
+        sessionStorage.setItem("routes",JSON.stringify(newRoutes));
+        console.log("setRoutes",newRoutes)
+      });
+    }
   },
 };
 </script>

@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       collapse: false,
-      query: {'userId': ''},
+      query: {'userId': this.$store.state.userId},
       items: []
     };
   },
@@ -73,7 +73,7 @@ export default {
         component: '404.vue',
         meta: { title: '404' }
       }];
-      fetchRoutes({}).then(res=>{
+      fetchRoutes(this.query).then(res=>{
         for (let re of res.routes) {
           newRoutes.push(re);
         }
@@ -122,10 +122,12 @@ export default {
 
   created() {
     //console.log("sideBar create")
-
+    this.keepVuexItems();
+    console.log("query.userId",this.query.userId)
+    this.query.userId= this.$store.state.userId;
     this.getRoutes();
     this.getSideBar();
-    this.keepVuexItems();
+
 
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
     bus.$on('collapse', msg => {

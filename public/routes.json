@@ -2,23 +2,23 @@
   "routes": [
     {
       "path": "/dashboard",
-      "component": "@/views/home/Dashboard",
+      "component": "home/Dashboard",
       "meta": { "title": "系统首页" }
     },
     {
       "path": "/oms",
-      "component":"@/views/oms/Index",
+      "component":"oms/Index",
       "meta": { "title": "商场首页" }
     },
 
     {
       "path": "/car",
-      "component": "@/views/oms/Car",
+      "component": "oms/Car",
       "meta": { "title": "汽车" }
     },
     {
       "path": "/404",
-      "component": "@/components/page/404.vue",
+      "component": "404.vue",
       "meta": { "title": "404" }
     }
   ]

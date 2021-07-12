@@ -54,6 +54,9 @@
 <script>
 import bus from '../common/bus';
 import {fetchData} from '@/api/sidebar';
+import {fetchRoutes} from '@/api/routes';
+import store from "@/store";
+import {children,routes} from "@/router";
 
 export default {
   data() {
@@ -66,7 +69,24 @@ export default {
 
   methods: {
 
-    getData() {
+    getRoutes(){
+      let newRoutes = [{
+        path: '/404',
+        component: '404.vue',
+        meta: { title: '404' }
+      }];
+      fetchRoutes({}).then(res=>{
+        for (let re of res.routes) {
+          newRoutes.push(re);
+        }
+        this.$store.commit('setRoutes',newRoutes)
+        this.$store.commit('setIsAddRoutes',true)
+        sessionStorage.setItem("routes",JSON.stringify(newRoutes));
+        console.log("setRoutes",newRoutes)
+      });
+    },
+
+    getSideBar() {
       if (this.$store.state.sideBar){
         console.log('1-sideBar',this.$store.state.sideBar);
         this.items=this.$store.state.sideBar;
@@ -78,7 +98,7 @@ export default {
         });
       }
     },
-    keepSideBarItems(){
+    keepVuexItems(){
       // 在页面加载时读取sessionStorage里的状态信息
       if (sessionStorage.getItem('store')) {
         this.$store.replaceState(
@@ -104,16 +124,16 @@ export default {
 
   created() {
     //console.log("sideBar create")
-    this.keepSideBarItems();
-    this.getData();
+
+    this.getRoutes();
+    this.keepVuexItems();
+    this.getSideBar();
 
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
     bus.$on('collapse', msg => {
       this.collapse = msg;
       bus.$emit('collapse-content', msg);
     });
-
-
 
   },
 

@@ -5,6 +5,17 @@ import store from "@/store";
 Vue.use(VueRouter);
 
 export let children = [
+
+    {
+        path: '/dashboard',
+        component: () => import('@/views/home/Dashboard.vue'),
+        meta: { "title": '系统首页' }
+    },
+    {
+        path: '/404',
+        component: () => import('@/views/404.vue'),
+        meta: { title: '404' }
+    }
    /* {
         path: '/dashboard',
         component: () => import('@/views/home/Dashboard.vue'),
@@ -111,7 +122,7 @@ export let children = [
     }*/
 ]
 
-let routes = [
+export let routes = [
     {
         path: '/',
         redirect: '/login'
@@ -135,78 +146,34 @@ let routes = [
 ]
 
 const  router = new VueRouter({
-    //routes, // routes 名称固定
+    routes, // routes 名称固定
     /* mode:'history',*/
    /* linkActiveClass:'active'*/
 })
 
-
-const x = [
-    {
-        path: '/',
-        redirect: '/login'
-    },
-    {
-        path: '/',
-        component: () => import('@/components/common/Home.vue'),
-        meta: { title: '自述文件' },
-        children:[
-            {
-                path: '/dashboard',
-                component: () => import('@/views/home/Dashboard.vue'),
-                meta: { "title": 'xx' }
-            },
-            {
-                path: '/404',
-                component: () => import('@/components/page/404.vue'),
-                meta: { title: '404' }
-            }
-        ]
-    },
-    {
-        path: '/login',
-        component: () => import('@/views/login/Index'),
-        meta: { title: '登录' }
-    },
-    {
-        path: '*',
-        redirect: '/404'
+function creatRoutes(){
+    let item = sessionStorage.getItem("routes");
+    if (item != null){
+        console.log('--- routes ---',routes);
+        let parse = JSON.parse(item);
+        children=[];
+        parse.forEach(item=>{
+            children.push({
+                path: item.path,
+                component: () => import("@/views/"+item.component),
+                meta: { "title": item.meta.title }
+            })
+        });
+        routes[1].children=children
+        router.addRoutes(routes)
     }
-]
-
-router.addRoutes(x);
+}
+//页面刷新保持 routes
+creatRoutes();
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
-
-    console.log('xx',store.state.routes);
-    if (store.state.routes != null){
-        let parse  = JSON.parse(store.state.routes);
-
-        parse.forEach(item=>{
-            console.log('component',item.component)
-
-        });
-        children=[
-            {
-                path: '/dashboard',
-                component: () => import('@/views/home/Dashboard.vue'),
-                meta: { "title": 'xx' }
-            },
-            {
-                path: '/404',
-                component: () => import('@/components/page/404.vue'),
-                meta: { title: '404' }
-            }
-        ]
-        routes[1].children=children
-        console.log('arr',routes)
-        router.addRoutes(routes)
-        console.log('router',router)
-
-    }else {
-        router.addRoutes(x);
-    }
+    console.log('--- beforeEach',to.path);
 
     document.title = `${to.meta.title} | vue-manage-system`;
     const role = localStorage.getItem('ms_username');
@@ -223,11 +190,14 @@ router.beforeEach((to, from, next) => {
                 confirmButtonText: '确定'
             });
         } else {
-
-
             next();
         }
     }
 });
+
+
+router.afterEach(()=>{
+   creatRoutes();
+})
 
 export default router;

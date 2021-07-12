@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="user-info-list">
-                        用户ID:{{userId.id}} 上次登录时间：
+                        用户ID:{{userId}} 上次登录时间：
                         <span>2019-11-01</span>
                     </div>
                     <div class="user-info-list">
@@ -116,7 +116,7 @@ export default {
     name: 'dashboard',
     data() {
         return {
-            userId:this.$route.query,
+            userId:this.$store.state.userId,
             imgSrc:'../../assets/img/img.jpg',
             name: localStorage.getItem('ms_username'),
             todoList: [

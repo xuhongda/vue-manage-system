@@ -63,9 +63,9 @@ export default {
           this.$store.commit('setUserId',this.userInfo.id)
           this.$router.push({
             path: '/dashboard',
-            query: {
+            /*query: {
               id:this.userInfo.id
-            }
+            }*/
           });
         } else {
           this.$message.error('请输入账号和密码');

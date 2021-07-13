@@ -6,6 +6,11 @@
       "meta": { "title": "系统首页" }
     },
     {
+      "path": "/tabs",
+      "component": "home/Tabs",
+      "meta": { "title": "消息提醒" }
+    },
+    {
       "path": "/oms",
       "component":"oms/Index",
       "meta": { "title": "商场首页" }

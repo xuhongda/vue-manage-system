@@ -132,7 +132,7 @@
         float: left;
         margin: 3px 5px 2px 3px;
         border-radius: 5px;
-        font-size: 13px;
+        font-size: 15px;
         overflow: hidden;
         cursor: pointer;
         height: 35px;

@@ -196,9 +196,13 @@ router.beforeEach((to, from, next) => {
 });
 
 
-router.afterEach(()=>{
+router.afterEach((to,from)=>{
     console.log('afterEach')
-    creatRoutes();
+    if (!store.state.isAddRoutes && from.path === "/login"){
+        creatRoutes();
+        store.commit('setIsAddRoutes',true)
+    }
+
 })
 
 export default router;

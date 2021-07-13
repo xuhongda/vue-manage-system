@@ -71,6 +71,7 @@ export default {
             if (command === 'loginout') {
                 this.$store.commit("setSideBar",null);
                 this.$store.commit("setRoutes",null);
+                this.$store.commit("setIsAddRoutes",false);
                 sessionStorage.clear()
                 localStorage.removeItem('ms_username');
                 this.$router.push('/login');

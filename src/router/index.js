@@ -173,7 +173,7 @@ creatRoutes();
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
-    console.log('--- beforeEach',to.path);
+   // console.log('--- beforeEach',to.path);
 
     document.title = `${to.meta.title} | vue-manage-system`;
     const role = localStorage.getItem('ms_username');
@@ -197,7 +197,7 @@ router.beforeEach((to, from, next) => {
 
 
 router.afterEach((to,from)=>{
-    console.log('afterEach')
+    //console.log('afterEach',store.state.isAddRoutes)
     if (!store.state.isAddRoutes && from.path === "/login"){
         creatRoutes();
         store.commit('setIsAddRoutes',true)

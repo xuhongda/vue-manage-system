@@ -80,7 +80,7 @@ export default {
         this.$store.commit('setRoutes',newRoutes)
         this.$store.commit('setIsAddRoutes',true)
         sessionStorage.setItem("routes",JSON.stringify(newRoutes));
-        console.log("setRoutes",newRoutes)
+       // console.log("setRoutes",newRoutes)
       });
     },
 
